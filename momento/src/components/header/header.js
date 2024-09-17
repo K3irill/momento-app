@@ -89,16 +89,3 @@ async function getTemperature() {
   return 19;
 }
 
-// import { findLocation } from './path/to/location.js';
-
-// async function getLocationData() {
-//   try {
-//     const location = await findLocation();
-//     console.log("Ваше местоположение:", location);
-//     // Можно использовать location.long и location.lat
-//   } catch (error) {
-//     console.error("Ошибка при получении местоположения:", error);
-//   }
-// }
-
-// getLocationData();
