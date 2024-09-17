@@ -12,7 +12,6 @@ export function findLocation() {
     }
 
     function error(err) {
-      // Можно использовать err.code и err.message для более точной диагностики ошибок
       const errorMessage = {
         1: "Доступ к геолокации отклонён.",
         2: "Невозможно определить местоположение.",

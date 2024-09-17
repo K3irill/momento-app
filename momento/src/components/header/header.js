@@ -1,4 +1,6 @@
 import "./header.scss";
+import { getWeatherData } from "../../api/weatherApi/getWeatherData";
+
 export async function renderHeader() {
   const header = document.createElement("header");
   header.classList.add("header");
@@ -8,6 +10,7 @@ export async function renderHeader() {
   const metricItem = await createMetricItem();
   header.appendChild(metricItem);
 
+  await getWeatherData();
   return header;
 }
 
@@ -88,4 +91,3 @@ async function getWeatherIcon() {
 async function getTemperature() {
   return 19;
 }
-
