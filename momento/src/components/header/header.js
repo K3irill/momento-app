@@ -2,6 +2,7 @@ import "./header.scss";
 import { getWeatherData } from "../../api/weatherApi/getWeatherData";
 import { weatherIcons } from "./weatherIcon";
 import { getWeatherIcon } from "./weatherIcon";
+import { linksModal } from "../modals/links.modal";
 
 export async function renderHeader() {
   //getting weather data
@@ -10,15 +11,19 @@ export async function renderHeader() {
   //
   const header = document.createElement("header");
   header.classList.add("header");
+  
+  const modalLinks = linksModal();
 
   const metricItem = await createMetricItem(weatherData);
-  header.appendChild(createLinksElement());
+  header.appendChild(createLinksElement(modalLinks));
   header.appendChild(metricItem);
 
+
+  header.prepend(modalLinks)
   return header;
 }
 
-function createLinksElement() {
+function createLinksElement(modal) {
   const linksEl = document.createElement("div");
   linksEl.classList.add("header__linksElement");
 
@@ -32,6 +37,10 @@ function createLinksElement() {
 
   linksEl.appendChild(linksSVG);
   linksEl.appendChild(linksTitle);
+
+  linksEl.addEventListener("click", () => {
+    modal.classList.toggle("modal_invisible");
+  });
 
   return linksEl;
 }

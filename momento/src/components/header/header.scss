@@ -1,6 +1,7 @@
 @import "../../styles/variables.scss";
 @import "../../styles/mixins.scss";
 .header {
+    position: relative;
     padding: 25px 40px;
     @include flex-horizontal-center;
     justify-content: space-between;

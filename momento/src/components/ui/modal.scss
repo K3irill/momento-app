@@ -1,0 +1,38 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+.modal {
+    position: absolute;
+    &_invisible {
+        visibility: hidden;
+    }
+    height: 150px;
+    width: 400px;
+    background-color: $bg-modal;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px 0 rgba(0, 0, 0);
+
+    @include flex-horizontal-center;
+    &__btn {
+        &-def {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+        background: transparent;
+        @include flex-horizontal-center;
+        @include transition(background-color);
+        width: 30px;
+        height: 30px;
+
+        justify-content: center;
+        border-radius: 50%;
+        &:hover {
+            background-color: lighten($bg-block, $amount: 35);
+        }
+        & img {
+        }
+        &-plus {
+            right: 60px;
+        }
+    }
+}

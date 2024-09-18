@@ -31,9 +31,7 @@ a {
     border-bottom: 1px solid transparent;
     animation: drawing 0.4s;
 
-    &:hover {
-        border-color: $primary;
-    }
+    
 }
 
 @import "./keyframes";

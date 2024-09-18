@@ -1,0 +1,33 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+.modal {
+    &__links{
+        top: 120px;
+        left: 15px;
+    }
+    &__list {
+        width: 100%;
+        &_item {
+            position: relative;
+        }
+        &_link {
+            position: relative;
+            padding: 0px 20px;
+            display: inline-block;
+            width: 100%;
+            @include transition(background-color);
+            &-more {
+                position: absolute;
+                right: 20px;
+                top: 0;
+                opacity: 1;
+            }
+            &:hover {
+                @include transition(background-color);
+                background-color: lighten($bg-block, $amount: 35);
+               
+            }
+           
+        }
+    }
+}
