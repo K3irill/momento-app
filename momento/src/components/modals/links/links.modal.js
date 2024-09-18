@@ -1,9 +1,9 @@
 import "./links.layout.scss";
-import plusSVG from "../../assets/plusSVG.svg";
-import moreSVG from "../../assets/moreSVG.svg";
-import backSVG from "../../assets/backSVG.svg";
-import { parentModal } from "../ui/modal";
-import { createBtn } from "../ui/modal";
+import plusSVG from "../../../assets/plusSVG.svg";
+import moreSVG from "../../../assets/moreSVG.svg";
+import backSVG from "../../../assets/backSVG.svg";
+import { parentModal } from "../../ui/modal";
+import { createBtn } from "../../ui/modal";
 
 export function linksModal() {
   const modalBlockWrapper = parentModal("modal__links-wrap");
@@ -98,6 +98,9 @@ export function linksModal() {
   listLinks.classList.add("modal__list");
   listLinks.append(createLink("Google", "https://www.google.com/"));
 
+
+  loadLinksFromLocalStorage(listLinks);
+
   modalBlock.append(listLinks);
 
   //a little bit validation
@@ -119,6 +122,8 @@ export function linksModal() {
       return;
     }
 
+    const newLink = { title, url };
+    addLinkToLocalStorage(newLink);
     listLinks.append(createLink(title, url));
 
     nameLinkInputForm.value = "";
@@ -143,4 +148,18 @@ function createLink(title, url) {
   item.append(link);
   item.append(createBtn(moreSVG, "modal__list_link-more"));
   return item;
+}
+
+function addLinkToLocalStorage(link) {
+  let links = JSON.parse(localStorage.getItem("links")) || [];
+  links.push(link);
+  localStorage.setItem("links", JSON.stringify(links));
+}
+
+function loadLinksFromLocalStorage(listLinks) {
+  let links = JSON.parse(localStorage.getItem("links")) || [];
+
+  links.forEach((link) => {
+    listLinks.append(createLink(link.title, link.url));
+  });
 }

@@ -2,7 +2,7 @@ import "./header.scss";
 import { getWeatherData } from "../../api/weatherApi/getWeatherData";
 import { weatherIcons } from "./weatherIcon";
 import { getWeatherIcon } from "./weatherIcon";
-import { linksModal } from "../modals/links.modal";
+import { linksModal } from "../modals/links/links.modal.js";
 
 export async function renderHeader() {
   //getting weather data
