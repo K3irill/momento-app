@@ -102,18 +102,16 @@ export function linksModal() {
 
   //a little bit validation
   baseFormBtn.addEventListener("click", (event) => {
-    event.preventDefault(); // предотвращаем стандартное поведение кнопки
+    event.preventDefault();
 
     const title = nameLinkInputForm.value.trim();
     const url = urlLinkInputForm.value.trim();
 
-    // Простая валидация названия
     if (title === "") {
       alert("Please enter a title for the link.");
       return;
     }
 
-    // Простая валидация URL (проверка формата ссылки)
     const urlPattern =
       /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
     if (!urlPattern.test(url)) {
@@ -121,13 +119,18 @@ export function linksModal() {
       return;
     }
 
-    // Если валидация пройдена, добавляем ссылку
     listLinks.append(createLink(title, url));
 
-    // Очищаем поля после добавления
     nameLinkInputForm.value = "";
     urlLinkInputForm.value = "";
     openLinkMenu()
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!modalBlockWrapper.contains(event.target) && !modalBtnLinkCreate.contains(event.target)) {
+      modalBlock.classList.remove("modal__links--shift-left");
+      createLinkMenu.classList.remove("modal__create-link-menu--active");
+    }
   });
 
   return modalBlockWrapper;
