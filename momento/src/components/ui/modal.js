@@ -17,7 +17,3 @@ export function createBtn(svg, ...classNames ) {
 
   return modalBtn;
 }
-
-function toggleModule(){
-  
-}

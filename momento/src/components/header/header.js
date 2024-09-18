@@ -3,6 +3,7 @@ import { getWeatherData } from "../../api/weatherApi/getWeatherData";
 import { weatherIcons } from "./weatherIcon";
 import { getWeatherIcon } from "./weatherIcon";
 import { linksModal } from "../modals/links/links.modal.js";
+import { weatherModal } from "../modals/weather/weather.modal.js";
 
 export async function renderHeader() {
   //getting weather data
@@ -14,12 +15,19 @@ export async function renderHeader() {
   header.classList.add("header");
 
   const modalLinks = linksModal();
+  const modalWeather = await weatherModal();
 
   const metricItem = await createMetricItem(weatherData);
-  header.appendChild(createLinksElement(modalLinks));
-  header.appendChild(metricItem);
+  metricItem.addEventListener("click", () => {
+    modalWeather.classList.toggle("modal_invisible");
+  });
 
-  header.prepend(modalLinks);
+  addElementsToBlock(header, [
+    createLinksElement(modalLinks),
+    metricItem,
+    modalLinks,
+    modalWeather,
+  ]);
   return header;
 }
 
@@ -35,8 +43,7 @@ function createLinksElement(modal) {
   linksTitle.classList.add("header__linksElement_title");
   linksTitle.textContent = "Links";
 
-  linksEl.appendChild(linksSVG);
-  linksEl.appendChild(linksTitle);
+  addElementsToBlock(linksEl, [linksSVG, linksTitle]);
 
   linksEl.addEventListener("click", (event) => {
     event.stopPropagation();
@@ -67,7 +74,6 @@ async function createMetricItem(res) {
   try {
     const cityName = res.cityName;
     const weatherIcon = await getWeatherIcon(res.weather, weatherIcons);
-    console.log(getWeatherIcon(res.weather, weatherIcons));
 
     const temperature = res.temperature.toFixed(0);
 
@@ -86,14 +92,16 @@ async function createMetricItem(res) {
     metricDegree.classList.add("header__metric-block_degree");
     metricDegree.textContent = `${temperature}`;
 
-    metricStat.appendChild(metricCurrentStat);
-    metricStat.appendChild(metricDegree);
-    metricBlock.appendChild(metricStat);
-    metricBlock.appendChild(metricCity);
+    addElementsToBlock(metricStat, [metricCurrentStat, metricDegree]);
+    addElementsToBlock(metricBlock, [metricStat, metricCity]);
   } catch (error) {
     console.error("Ошибка при получении данных:", error);
     metricBlock.textContent = "Не удалось загрузить данные";
   }
 
   return metricBlock;
+}
+
+export function addElementsToBlock(block, elements) {
+  elements.forEach((element) => block.append(element));
 }

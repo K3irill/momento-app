@@ -1,0 +1,52 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/mixins.scss";
+
+.modal {
+    &__weather {
+
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        min-width: 600px;
+        padding: 20px 30px;
+        height: 300px;
+        @include transition;
+        top: 120px;
+        right: 15px;
+        &_temp{
+            font-size: 46px;
+        }
+        &_img{
+            >svg{
+                width: 60px;
+                height: 60px;
+            }
+             
+            
+
+        }
+        &_city-title{
+            font-size: 24px;
+        }
+        &_city-subtitle{
+            color: $primary;
+
+        }
+    }
+    &__city-info-block{
+        top: 10px;
+        position: absolute;
+    }
+    &__weather-feels-block{
+        font-size: 19px;
+        margin-left: 180px;
+        color: $text-light-gray;
+        font-weight: 600;
+    }
+    &__weather-info-block{
+        @include flex-horizontal-center;
+    }
+    &__weather-temp-block{
+        @include flex-horizontal-center;
+    }
+}

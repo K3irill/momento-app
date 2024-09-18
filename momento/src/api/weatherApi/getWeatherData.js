@@ -16,7 +16,7 @@ export async function getWeatherData() {
     console.log(data);
     if (data) {
       const temperature = data.main.temp;
-      const tempFeels = data.main.temp["feels_like"];
+      const tempFeels = data.main["feels_like"];
       const weather = data.weather[0].main;
       const windData = data.wind;
       const windSpeed = windData.speed;
