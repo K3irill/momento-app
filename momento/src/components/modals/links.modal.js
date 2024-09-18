@@ -18,46 +18,118 @@ export function linksModal() {
     "modal__btn-plus",
     "modal__btn-def"
   );
-
+  //-------------------------------------------------------------------
+  // menu for creating links
   const createLinkMenu = document.createElement("div");
   createLinkMenu.classList.add("modal__create-link-menu");
 
   const linkMenuTitle = document.createElement("h2");
+  linkMenuTitle.classList.add("modal__create-link-title");
   linkMenuTitle.textContent = "Creating a link";
 
+  //creating form
+  const baseForm = document.createElement("div");
+  baseForm.classList.add("modal__base-form");
+
+  //first input
+  const nameLinkLabelForm = document.createElement("label");
+  nameLinkLabelForm.classList.add("modal__label-name-link");
+  nameLinkLabelForm.textContent = "Title";
+
+  const nameLinkInputForm = document.createElement("input");
+  nameLinkInputForm.classList.add("modal__input-name-link");
+
+  //second input
+  const urlLinkLabelForm = document.createElement("label");
+  urlLinkLabelForm.classList.add("modal__label-name-link");
+  urlLinkLabelForm.textContent = "Link";
+
+  const urlLinkInputForm = document.createElement("input");
+  urlLinkInputForm.classList.add("modal__input-name-link");
+
+  //button
+  const baseFormBtn = document.createElement("button");
+  baseFormBtn.classList.add("modal__form-btn");
+  baseFormBtn.textContent = "Add";
+  //___________________________________________________//
+
   createLinkMenu.append(linkMenuTitle);
+  //pushing form elements in base-form
+  baseForm.append(nameLinkLabelForm);
+  baseForm.append(nameLinkInputForm);
+  baseForm.append(urlLinkLabelForm);
+  baseForm.append(urlLinkInputForm);
+  baseForm.append(baseFormBtn);
+  //----------------
+
+  createLinkMenu.append(baseForm);
   modalBlock.append(modalBtnMore);
-
+  //-----------------------------------------------------------------------
+  //listener for pressing on  modalBtnLinkCreate
   let isMenuOpen = false;
-
-  modalBtnLinkCreate.addEventListener("click", () => {
+  function openLinkMenu() {
     modalBlock.classList.toggle("modal__links--shift-left");
     createLinkMenu.classList.toggle("modal__create-link-menu--active");
 
     modalBlockWrapper.append(createLinkMenu);
 
     if (isMenuOpen) {
-      modalBlockWrapper.style.height = '150px'
+      modalBlockWrapper.style.height = "150px";
       modalBtnLinkCreate.querySelector("img").src = plusSVG;
       modalBtnLinkCreate.style.transform = "translateX(0)";
     } else {
-            modalBlockWrapper.style.height = '300px'
+      modalBlockWrapper.style.height = "300px";
       modalBtnLinkCreate.querySelector("img").src = backSVG;
       modalBtnLinkCreate.style.transform = "translateX(-280px)";
     }
 
-    isMenuOpen = !isMenuOpen; 
+    isMenuOpen = !isMenuOpen;
+  }
+  modalBtnLinkCreate.addEventListener("click", () => {
+    openLinkMenu()
   });
+
+  //--------------------------------------
 
   modalBlockWrapper.append(modalBlock);
   modalBlockWrapper.append(modalBtnLinkCreate);
 
   const listLinks = document.createElement("ul");
   listLinks.classList.add("modal__list");
-
   listLinks.append(createLink("Google", "https://www.google.com/"));
 
   modalBlock.append(listLinks);
+
+  //a little bit validation
+  baseFormBtn.addEventListener("click", (event) => {
+    event.preventDefault(); // предотвращаем стандартное поведение кнопки
+
+    const title = nameLinkInputForm.value.trim();
+    const url = urlLinkInputForm.value.trim();
+
+    // Простая валидация названия
+    if (title === "") {
+      alert("Please enter a title for the link.");
+      return;
+    }
+
+    // Простая валидация URL (проверка формата ссылки)
+    const urlPattern =
+      /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+    if (!urlPattern.test(url)) {
+      alert("Please enter a valid URL.");
+      return;
+    }
+
+    // Если валидация пройдена, добавляем ссылку
+    listLinks.append(createLink(title, url));
+
+    // Очищаем поля после добавления
+    nameLinkInputForm.value = "";
+    urlLinkInputForm.value = "";
+    openLinkMenu()
+  });
+
   return modalBlockWrapper;
 }
 

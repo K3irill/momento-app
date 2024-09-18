@@ -3,8 +3,8 @@
 .modal {
     position: absolute;
     @include transition;
-    height: 150px;
-    width: 400px;
+    min-height: 150px;
+    max-width: 400px;
     background-color: $bg-modal;
     border-radius: 5px;
     box-shadow: 1px 1px 5px 0 rgba(0, 0, 0);
