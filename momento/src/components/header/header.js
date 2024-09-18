@@ -17,8 +17,15 @@ export async function renderHeader() {
   const modalWeather = await weatherModal();
 
   const metricItem = await createMetricItem(weatherData);
-  metricItem.addEventListener("click", () => {
+  metricItem.addEventListener("click", (event) => {
+    event.stopPropagation(); 
     modalWeather.classList.toggle("modal_invisible");
+
+    if (!modalWeather.classList.contains("modal_invisible")) {
+      document.addEventListener("click", closeWeatherModalOnClickOutside);
+    } else {
+      document.removeEventListener("click", closeWeatherModalOnClickOutside);
+    }
   });
 
   addElementsToBlock(header, [
@@ -28,6 +35,13 @@ export async function renderHeader() {
     modalWeather,
   ]);
   return header;
+
+  function closeWeatherModalOnClickOutside(event) {
+    if (!modalWeather.contains(event.target) && !metricItem.contains(event.target)) {
+      modalWeather.classList.add("modal_invisible");
+      document.removeEventListener("click", closeWeatherModalOnClickOutside);
+    }
+  }
 }
 
 function createLinksElement(modal) {
