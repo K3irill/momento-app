@@ -3,7 +3,7 @@ import plusSVG from "../../../assets/plusSVG.svg";
 import moreSVG from "../../../assets/moreSVG.svg";
 import backSVG from "../../../assets/backSVG.svg";
 import deleteSVG from "../../../assets/deleteSVG.svg";
-
+import { addElementsToBlock } from "../../header/header";
 import { parentModal } from "../../ui/modal";
 import { createBtn } from "../../ui/modal";
 
@@ -55,17 +55,19 @@ export function linksModal() {
   baseFormBtn.textContent = "Add";
   //___________________________________________________//
 
-  createLinkMenu.append(linkMenuTitle);
   //pushing form elements in base-form
-  baseForm.append(nameLinkLabelForm);
-  baseForm.append(nameLinkInputForm);
-  baseForm.append(urlLinkLabelForm);
-  baseForm.append(urlLinkInputForm);
-  baseForm.append(baseFormBtn);
-  //----------------
 
-  createLinkMenu.append(baseForm);
-  modalBlock.append(modalBtnMore);
+  addElementsToBlock(createLinkMenu, [linkMenuTitle, baseForm]);
+  addElementsToBlock(baseForm, [
+    nameLinkLabelForm,
+    nameLinkInputForm,
+    urlLinkLabelForm,
+    urlLinkInputForm,
+    baseFormBtn,
+  ]);
+  //----------------
+  addElementsToBlock(modalBlock, [modalBtnMore])
+
   //-----------------------------------------------------------------------
   //listener for pressing on  modalBtnLinkCreate
   let isMenuOpen = false;
@@ -93,9 +95,8 @@ export function linksModal() {
 
   //--------------------------------------
 
-  modalBlockWrapper.append(modalBlock);
-  modalBlockWrapper.append(modalBtnLinkCreate);
-
+  addElementsToBlock(modalBlockWrapper, [modalBlock, modalBtnLinkCreate])
+  
   const listLinks = document.createElement("ul");
   listLinks.classList.add("modal__list");
   listLinks.append(createLink("Google", "https://www.google.com/"));
