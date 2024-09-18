@@ -13,6 +13,12 @@
         @include transition;
         top: 120px;
         right: 15px;
+        &_hr{
+            opacity: 0.5;
+            position: relative;
+            top: 30px;
+            width: 100%;
+        }
         &_temp{
             font-size: 46px;
         }

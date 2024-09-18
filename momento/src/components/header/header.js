@@ -8,7 +8,6 @@ import { weatherModal } from "../modals/weather/weather.modal.js";
 export async function renderHeader() {
   //getting weather data
   const weatherData = await getWeatherData();
-  console.log(weatherData);
 
   //
   const header = document.createElement("header");

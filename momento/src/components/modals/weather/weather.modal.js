@@ -51,7 +51,7 @@ export async function weatherModal() {
     const weatherTemp = document.createElement("h2");
     weatherTemp.classList.add("modal__weather_temp");
     weatherTemp.textContent = weatherData?.temperature
-      ? `${weatherData.temperature}°C`
+      ? `${weatherData.temperature.toFixed(0)}°C`
       : "N/A";
 
     addElementsToBlock(weatherTempBlock, [weatherImg, weatherTemp]);
@@ -73,12 +73,14 @@ export async function weatherModal() {
       : "Wind: N/A";
 
     addElementsToBlock(weatherFeelsBlock, [feelsLikeEl, windEl]);
-
+    const weatherLine = document.createElement('hr')
+    weatherLine.classList.add('modal__weather_hr')
     addElementsToBlock(weatherInfoBlock, [weatherTempBlock, weatherFeelsBlock]);
     addElementsToBlock(modalWeather, [
       cityInfoBlock,
       modalBtnMore,
       weatherInfoBlock,
+      weatherLine
     ]);
   } catch (error) {
     weatherInfoBlock.innerHTML = "<p>Failed to load weather data</p>";
