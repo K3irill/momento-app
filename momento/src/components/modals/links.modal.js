@@ -126,12 +126,7 @@ export function linksModal() {
     openLinkMenu()
   });
 
-  document.addEventListener("click", (event) => {
-    if (!modalBlockWrapper.contains(event.target) && !modalBtnLinkCreate.contains(event.target)) {
-      modalBlock.classList.remove("modal__links--shift-left");
-      createLinkMenu.classList.remove("modal__create-link-menu--active");
-    }
-  });
+ 
 
   return modalBlockWrapper;
 }

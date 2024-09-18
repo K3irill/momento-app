@@ -8,19 +8,18 @@ export async function renderHeader() {
   //getting weather data
   const weatherData = await getWeatherData();
   console.log(weatherData);
-  
+
   //
   const header = document.createElement("header");
   header.classList.add("header");
-  
+
   const modalLinks = linksModal();
 
   const metricItem = await createMetricItem(weatherData);
   header.appendChild(createLinksElement(modalLinks));
   header.appendChild(metricItem);
 
-
-  header.prepend(modalLinks)
+  header.prepend(modalLinks);
   return header;
 }
 
@@ -39,9 +38,24 @@ function createLinksElement(modal) {
   linksEl.appendChild(linksSVG);
   linksEl.appendChild(linksTitle);
 
-  linksEl.addEventListener("click", () => {
+  linksEl.addEventListener("click", (event) => {
+    event.stopPropagation();
+
     modal.classList.toggle("modal_invisible");
+
+    if (!modal.classList.contains("modal_invisible")) {
+      document.addEventListener("click", closeModalOnClickOutside);
+    } else {
+      document.removeEventListener("click", closeModalOnClickOutside);
+    }
   });
+
+  function closeModalOnClickOutside(event) {
+    if (!modal.contains(event.target) && !linksEl.contains(event.target)) {
+      modal.classList.add("modal_invisible");
+      document.removeEventListener("click", closeModalOnClickOutside);
+    }
+  }
 
   return linksEl;
 }
