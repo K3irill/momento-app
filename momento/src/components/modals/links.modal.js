@@ -16,7 +16,7 @@ export function linksModal() {
   const listLinks = document.createElement("ul");
   listLinks.classList.add("modal__list");
 
-  listLinks.appendChild(createLink("google", "google.com"));
+  listLinks.appendChild(createLink("Google", "https://www.google.com/"));
 
   modalBlock.appendChild(listLinks);
   return modalBlock;
