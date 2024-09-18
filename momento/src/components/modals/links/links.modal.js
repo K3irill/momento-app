@@ -2,6 +2,8 @@ import "./links.layout.scss";
 import plusSVG from "../../../assets/plusSVG.svg";
 import moreSVG from "../../../assets/moreSVG.svg";
 import backSVG from "../../../assets/backSVG.svg";
+import deleteSVG from "../../../assets/deleteSVG.svg";
+
 import { parentModal } from "../../ui/modal";
 import { createBtn } from "../../ui/modal";
 
@@ -86,7 +88,7 @@ export function linksModal() {
     isMenuOpen = !isMenuOpen;
   }
   modalBtnLinkCreate.addEventListener("click", () => {
-    openLinkMenu()
+    openLinkMenu();
   });
 
   //--------------------------------------
@@ -97,7 +99,6 @@ export function linksModal() {
   const listLinks = document.createElement("ul");
   listLinks.classList.add("modal__list");
   listLinks.append(createLink("Google", "https://www.google.com/"));
-
 
   loadLinksFromLocalStorage(listLinks);
 
@@ -115,12 +116,12 @@ export function linksModal() {
       return;
     }
 
-    const urlPattern =
-      /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
-    if (!urlPattern.test(url)) {
-      alert("Please enter a valid URL.");
-      return;
-    }
+    // const urlPattern =
+    //   /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+    // if (!urlPattern.test(url)) {
+    //   alert("Please enter a valid URL.");
+    //   return;
+    // }
 
     const newLink = { title, url };
     addLinkToLocalStorage(newLink);
@@ -128,10 +129,8 @@ export function linksModal() {
 
     nameLinkInputForm.value = "";
     urlLinkInputForm.value = "";
-    openLinkMenu()
+    openLinkMenu();
   });
-
- 
 
   return modalBlockWrapper;
 }
@@ -145,9 +144,24 @@ function createLink(title, url) {
   link.textContent = title;
   link.href = url;
 
+  const deleteBtn = createBtn(deleteSVG, "modal__list_link-more");
+
+  deleteBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    deleteLink(title, item);
+  });
+
   item.append(link);
-  item.append(createBtn(moreSVG, "modal__list_link-more"));
+  item.append(deleteBtn);
   return item;
+}
+
+function deleteLink(title, listItem) {
+  listItem.remove();
+
+  let links = JSON.parse(localStorage.getItem("links")) || [];
+  links = links.filter((link) => link.title !== title);
+  localStorage.setItem("links", JSON.stringify(links));
 }
 
 function addLinkToLocalStorage(link) {
