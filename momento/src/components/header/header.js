@@ -7,7 +7,8 @@ import { linksModal } from "../modals/links.modal";
 export async function renderHeader() {
   //getting weather data
   const weatherData = await getWeatherData();
-
+  console.log(weatherData);
+  
   //
   const header = document.createElement("header");
   header.classList.add("header");

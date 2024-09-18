@@ -1,7 +1,10 @@
 export function findLocation() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     if (!navigator.geolocation) {
-      reject("Ваш браузер не поддерживает геолокацию.");
+      console.warn(
+        "Ваш браузер не поддерживает геолокацию. Используются данные по умолчанию."
+      );
+      resolve({ long: 37.6173, lat: 55.7558 });
     } else {
       navigator.geolocation.getCurrentPosition(success, error);
     }
@@ -12,12 +15,10 @@ export function findLocation() {
     }
 
     function error(err) {
-      const errorMessage = {
-        1: "Доступ к геолокации отклонён.",
-        2: "Невозможно определить местоположение.",
-        3: "Тайм-аут запроса геолокации.",
-      };
-      reject(errorMessage[err.code] || "Неизвестная ошибка геолокации.");
+      console.warn(
+        "Геолокация не разрешена или не может быть определена. Используются данные по умолчанию."
+      );
+      resolve({ long: 37.6173, lat: 55.7558 });
     }
   });
 }

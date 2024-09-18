@@ -1,9 +1,43 @@
 @import "../../styles/variables.scss";
 @import "../../styles/mixins.scss";
 .modal {
-    &__links{
-        top: 120px;
-        left: 15px;
+    overflow: hidden;
+    width: 100%;
+    &__create-link-menu {
+        padding: 10px;
+        text-align: center;
+        max-width: 0;
+        overflow: hidden;
+        transform: translateX(100%); // Скрываем элемент за пределами справа
+        transition:
+            transform 0.5s ease,
+            max-width 0.5s ease; // Плавный переход
+        width: 400px; // Ширина меню
+    }
+    &__create-link-menu--active {
+        display: flex;
+        justify-content: center;
+        max-width: 400px;
+        transform: translateX(-95px); // Показываем элемент
+    }
+
+    &__links {
+        transition: 0.5s;
+        width: 100%;
+        height: 100%;
+        @include flex-horizontal-center;
+        &-wrap {
+            top: 120px;
+            left: 15px;
+            display: flex;
+        }
+        &_create-menu {
+            min-height: 300px;
+        }
+        &--shift-left {
+            transform: translateX(-400px); // Смещаем элемент влево
+            transition: transform 0.5s ease; // Плавный переход
+        }
     }
     &__list {
         width: 100%;
@@ -25,9 +59,7 @@
             &:hover {
                 @include transition(background-color);
                 background-color: lighten($bg-block, $amount: 35);
-               
             }
-           
         }
     }
 }

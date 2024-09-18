@@ -3,20 +3,21 @@
 .modal {
     position: absolute;
     @include transition;
-
-    &_invisible {
-        top: 0;
-        opacity: 0;
-        visibility: hidden;
-    }
     height: 150px;
     width: 400px;
     background-color: $bg-modal;
     border-radius: 5px;
     box-shadow: 1px 1px 5px 0 rgba(0, 0, 0);
 
-    @include flex-horizontal-center;
+    &_invisible {
+        top: 0;
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+   
     &__btn {
+        z-index: 1000;
         &-def {
             position: absolute;
             right: 20px;
@@ -37,6 +38,12 @@
         }
         &-plus {
             right: 60px;
+            @include transition;
+        }
+        &-back{
+            position: absolute;
+            top: 15px;
+            left: 20px;
         }
     }
 }
