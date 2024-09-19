@@ -4,7 +4,7 @@ export function findLocation() {
       console.warn(
         "Ваш браузер не поддерживает геолокацию. Используются данные по умолчанию."
       );
-      resolve({ long: 37.6173, lat: 55.7558 });
+      resolve({ long: 38.976, lat: 45.0448 });
     } else {
       navigator.geolocation.getCurrentPosition(success, error);
     }
@@ -18,7 +18,7 @@ export function findLocation() {
       console.warn(
         "Геолокация не разрешена или не может быть определена. Используются данные по умолчанию."
       );
-      resolve({ long: 37.6173, lat: 55.7558 });
+      resolve({ long: 38.976, lat: 45.0448 });
     }
   });
 }

@@ -112,7 +112,7 @@ export function linksModal() {
     const title = nameLinkInputForm.value.trim();
     const url = urlLinkInputForm.value.trim();
 
-    if (title === "") {
+    if (title === "" || url === "") {
       alert("Please enter a title for the link.");
       return;
     }
