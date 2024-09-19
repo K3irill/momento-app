@@ -1,6 +1,10 @@
 export function findLocation() {
   return new Promise((resolve) => {
-    if (!navigator.geolocation) {
+    const savedLocation = localStorage.getItem("userLocation");
+
+    if (savedLocation) {
+      resolve(JSON.parse(savedLocation));
+    } else if (!navigator.geolocation) {
       console.warn(
         "Ваш браузер не поддерживает геолокацию. Используются данные по умолчанию."
       );
@@ -11,7 +15,9 @@ export function findLocation() {
 
     function success(position) {
       const { longitude, latitude } = position.coords;
-      resolve({ long: longitude, lat: latitude });
+      const location = { long: longitude, lat: latitude };
+      localStorage.setItem("userLocation", JSON.stringify(location));
+      resolve(location);
     }
 
     function error(err) {
