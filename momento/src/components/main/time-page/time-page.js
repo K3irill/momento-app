@@ -1,8 +1,9 @@
 import "./time-page.scss";
 import { createTime } from "./time";
 import { createDate } from "./data";
-import { addElementsToBlock } from "../header/header";
-import { timeOfDay } from "./photoBytime";
+import { addElementsToBlock } from "../../header/header";
+import { timeOfDay } from "../photoBytime";
+import { tasksModal } from "../../modals/todo/todo.modal.js";
 
 export function renderTimePage() {
   const timePageContainer = document.createElement("div");
@@ -18,8 +19,32 @@ export function renderTimePage() {
   updateTime(timeEl, dateEl, timePageContainer);
   setInterval(() => updateTime(timeEl, dateEl, timePageContainer), 1000);
 
-  addElementsToBlock(timePageContainer, [timeEl, dateEl]);
+  const taskEl = document.createElement("h2");
+  taskEl.classList.add("time-page__tasks-title");
+  taskEl.textContent = "Tasks";
 
+  const tasksModalEl = tasksModal();
+
+  taskEl.addEventListener("click", (event) => {
+    event.stopPropagation();
+  
+    tasksModalEl.classList.toggle("modal_invisible");
+  
+    if (!tasksModalEl.classList.contains("modal_invisible")) {
+      document.addEventListener("click", closeTasksModalOnClickOutside);
+    } else {
+      document.removeEventListener("click", closeTasksModalOnClickOutside);
+    }
+  });
+  
+  function closeTasksModalOnClickOutside(event) {
+    if (!tasksModalEl.contains(event.target)) {
+      tasksModalEl.classList.add("modal_invisible");
+      document.removeEventListener("click", closeTasksModalOnClickOutside);
+    }
+  }
+
+  addElementsToBlock(timePageContainer, [timeEl, dateEl, taskEl, tasksModalEl]);
   return timePageContainer;
 }
 
@@ -74,5 +99,3 @@ function format(word) {
   }
   return month.join("");
 }
-
-

@@ -1,0 +1,49 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/mixins.scss";
+
+.modal {
+    &__title-tasks{
+        font-size: 22px;
+        text-align: center;
+        padding-top: 10px;
+    }
+    &__tasks-wrap {
+        height: 300px;
+        bottom: 80px;
+        right: 20px;
+        @media (max-width: 420px) {
+            right: 10px;
+        }
+    }
+    &__tasks{
+        padding: 20px;
+    }
+    &__tasks-form{
+
+    }
+    &__tasks-list{
+        max-height: 175px;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+    &__btn-clear-all-tasks{
+        position: absolute;
+        top: 60px;
+        right: 40px;
+    }
+    &__tasks-input{
+        border-bottom: 1px solid #ffffff;
+        width: 100%;
+        &::placeholder{
+            color:$text-light-gray;
+        }
+
+    }
+    &__completed-task {
+        text-decoration: line-through;
+        color: gray;
+      }
+}
