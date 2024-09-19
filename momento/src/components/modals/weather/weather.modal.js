@@ -21,7 +21,6 @@ export async function weatherModal() {
 
   try {
     const weatherData = await getWeatherData();
-    console.log(weatherData);
 
     weatherInfoBlock.innerHTML = "";
 
