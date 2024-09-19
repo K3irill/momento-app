@@ -1,6 +1,6 @@
 import "./todo.layout.scss";
-import clearAllSvg from "../../../assets/clear-allSVG.svg";
-import deleteSVG from "../../../assets/deleteSVG.svg";
+import clearAllSvg from "/public/assets/clear-allSVG.svg";
+import deleteSVG from "/public/assets/deleteSVG.svg";
 import { addElementsToBlock } from "../../header/header";
 import { parentModal } from "../../ui/modal";
 import { createBtn } from "../../ui/modal";

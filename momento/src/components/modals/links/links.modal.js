@@ -1,8 +1,8 @@
 import "./links.layout.scss";
-import plusSVG from "../../../assets/plusSVG.svg";
-import moreSVG from "../../../assets/moreSVG.svg";
-import backSVG from "../../../assets/backSVG.svg";
-import deleteSVG from "../../../assets/deleteSVG.svg";
+import plusSVG from "/public/assets/plusSVG.svg";
+import moreSVG from "/public/assets/moreSVG.svg";
+import backSVG from "/public/assets/backSVG.svg";
+import deleteSVG from "/public/assets/deleteSVG.svg";
 import { addElementsToBlock } from "../../header/header";
 import { parentModal } from "../../ui/modal";
 import { createBtn } from "../../ui/modal";

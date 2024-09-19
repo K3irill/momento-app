@@ -1,7 +1,7 @@
 import "./weather.layout.scss";
 import { parentModal } from "../../ui/modal";
 import { createBtn } from "../../ui/modal";
-import moreSVG from "../../../assets/moreSVG.svg";
+import moreSVG from "/public/assets/moreSVG.svg";
 import { getWeatherIcon, weatherIcons } from "../../header/weatherIcon";
 import { addElementsToBlock } from "../../header/header";
 import { getWeatherData } from "../../../api/weatherApi/getWeatherData";
