@@ -5,6 +5,10 @@ import { getWeatherIcon } from "./weatherIcon";
 import { linksModal } from "../modals/links/links.modal.js";
 import { weatherModal } from "../modals/weather/weather.modal.js";
 
+export function addElementsToBlock(block, elements) {
+  elements.forEach((element) => block.append(element));
+}
+
 export async function renderHeader() {
   //getting weather data
   const weatherData = await getWeatherData();
@@ -18,7 +22,7 @@ export async function renderHeader() {
 
   const metricItem = await createMetricItem(weatherData);
   metricItem.addEventListener("click", (event) => {
-    event.stopPropagation(); 
+    event.stopPropagation();
     modalWeather.classList.toggle("modal_invisible");
 
     if (!modalWeather.classList.contains("modal_invisible")) {
@@ -37,7 +41,10 @@ export async function renderHeader() {
   return header;
 
   function closeWeatherModalOnClickOutside(event) {
-    if (!modalWeather.contains(event.target) && !metricItem.contains(event.target)) {
+    if (
+      !modalWeather.contains(event.target) &&
+      !metricItem.contains(event.target)
+    ) {
       modalWeather.classList.add("modal_invisible");
       document.removeEventListener("click", closeWeatherModalOnClickOutside);
     }
@@ -113,8 +120,4 @@ async function createMetricItem(res) {
   }
 
   return metricBlock;
-}
-
-export function addElementsToBlock(block, elements) {
-  elements.forEach((element) => block.append(element));
 }

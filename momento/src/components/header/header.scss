@@ -1,10 +1,12 @@
 @import "../../styles/variables.scss";
 @import "../../styles/mixins.scss";
 .header {
-    position: relative;
+    position: absolute;
+    z-index: 1000;
     padding: 25px 40px;
     @include flex-horizontal-center;
     justify-content: space-between;
+    min-width: 100%;
     &__linksElement {
         cursor: pointer;
         width: 40px;
@@ -22,6 +24,7 @@
         }
     }
     &__metric-block {
+        
         min-width: 100px;
         display: flex;
         flex-direction: column;
