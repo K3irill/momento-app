@@ -20,3 +20,4 @@ export const timeOfDay = [
     url: "./assets/for-slider/03.jpg",
   },
 ];
+console.log("It is works!");

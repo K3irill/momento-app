@@ -57,6 +57,7 @@ function createLinksElement(modal) {
 
   const linksSVG = document.createElement("img");
   linksSVG.src = "./assets/linksSVG.svg";
+  console.log("It is works!");
   linksSVG.classList.add("header__linksElement_img");
 
   const linksTitle = document.createElement("p");
