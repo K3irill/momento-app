@@ -84,7 +84,7 @@ export function linksModal() {
     } else {
       modalBlockWrapper.style.height = "300px";
       modalBtnLinkCreate.querySelector("img").src = backSVG;
-      modalBtnLinkCreate.style.transform = "translateX(-280px)";
+      modalBtnLinkCreate.style.transform = "translateX(30px)";
     }
 
     isMenuOpen = !isMenuOpen;

@@ -33,6 +33,13 @@
             justify-content: center;
             top: 120px;
             left: 15px;
+            @media (max-width: 620px) {
+                &{
+                    left: 10px;
+        
+                }
+                
+            }
         }
 
         &--shift-left {
@@ -102,5 +109,6 @@
                 background-color: lighten($bg-block, $amount: 35);
             }
         }
+        
     }
 }

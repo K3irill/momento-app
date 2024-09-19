@@ -3,7 +3,6 @@
 
 .modal {
     &__weather {
-
         display: flex;
         justify-content: center;
         flex-direction: column;
@@ -13,45 +12,70 @@
         @include transition;
         top: 120px;
         right: 15px;
-        &_hr{
+
+        &_hr {
             opacity: 0.5;
             position: relative;
             top: 30px;
             width: 100%;
         }
-        &_temp{
+        &_temp {
             font-size: 46px;
         }
-        &_img{
-            >svg{
+        &_img {
+            > svg {
                 width: 60px;
                 height: 60px;
             }
-             
-
         }
-        &_city-title{
+        &_city-title {
             font-size: 24px;
         }
-        &_city-subtitle{
+        &_city-subtitle {
             color: $primary;
-
         }
     }
-    &__city-info-block{
+    &__city-info-block {
         top: 10px;
         position: absolute;
     }
-    &__weather-feels-block{
+    &__weather-feels-block {
         font-size: 19px;
         margin-left: 180px;
         color: $text-light-gray;
         font-weight: 600;
     }
-    &__weather-info-block{
+    &__weather-info-block {
         @include flex-horizontal-center;
     }
-    &__weather-temp-block{
+    &__weather-temp-block {
         @include flex-horizontal-center;
+    }
+    @media (max-width: 620px) {
+        &__weather {
+            min-width: 300px;
+            max-width: 300px;
+            right: 10px;
+            &_temp {
+                font-size: 32px;
+            }
+            &_img {
+                > svg {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+        }
+        &__weather-feels-block {
+            font-size: 20px;
+            margin-left: 0px;
+        }
+        &__weather-info-block {
+            @include flex-horizontal-center;
+            flex-direction: column;
+
+
+        }
+        
     }
 }
