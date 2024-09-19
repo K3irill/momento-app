@@ -1,5 +1,6 @@
 import "./todo.layout.scss";
 import clearAllSvg from "../../../assets/clear-allSVG.svg";
+import deleteSVG from "../../../assets/deleteSVG.svg";
 import { addElementsToBlock } from "../../header/header";
 import { parentModal } from "../../ui/modal";
 import { createBtn } from "../../ui/modal";
@@ -26,7 +27,7 @@ export function tasksModal() {
     );
     if (clearConfirmation) {
       taskListEl.innerHTML = "";
-      localStorage.removeItem("tasks"); 
+      localStorage.removeItem("tasks");
     }
   });
   //________________________________________________\\
@@ -48,10 +49,12 @@ export function tasksModal() {
     const title = taskFormInput.value.trim();
 
     if (title) {
-      const newTask = { title };
+      const newTask = { title, completed: false };
       addTaskToLocalStorage(newTask);
-      taskListEl.append(createTask(title));
-      taskFormInput.value = ""; 
+      taskListEl.append(createTask(newTask));
+      taskFormInput.value = "";
+    } else {
+      alert("Enter any text");
     }
   });
 
@@ -67,14 +70,26 @@ export function tasksModal() {
   return modalTaskWrapper;
 }
 
-function createTask(title) {
+function createTask(task) {
   const taskItem = document.createElement("li");
+  taskItem.classList.add("modal__tasks-item");
+
   const taskCheckbox = document.createElement("input");
   taskCheckbox.setAttribute("type", "checkbox");
+  taskCheckbox.checked = task.completed;
+
   const taskTitle = document.createElement("label");
-  taskTitle.textContent = title;
+  const taskDeleteBtn = createBtn(deleteSVG, "modal__tasks-delete-btn");
+  taskDeleteBtn.setAttribute("title", "delete task");
+  taskTitle.textContent = task.title;
+
+  if (task.completed) {
+    taskTitle.classList.add("modal__completed-task");
+  }
 
   taskCheckbox.addEventListener("change", () => {
+    updateTaskInLocalStorage(task.title, taskCheckbox.checked);
+
     if (taskCheckbox.checked) {
       taskTitle.classList.add("modal__completed-task");
     } else {
@@ -82,7 +97,12 @@ function createTask(title) {
     }
   });
 
-  addElementsToBlock(taskItem, [taskCheckbox, taskTitle]);
+  taskDeleteBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    deleteTask(task.title, taskItem);
+  });
+
+  addElementsToBlock(taskItem, [taskCheckbox, taskTitle, taskDeleteBtn]);
 
   return taskItem;
 }
@@ -97,6 +117,27 @@ function loadTasksFromLocalStorage(taskListEl) {
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
   tasks.forEach((task) => {
-    taskListEl.append(createTask(task.title));
+    taskListEl.append(createTask(task));
   });
+}
+
+function updateTaskInLocalStorage(title, completed) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  tasks = tasks.map((task) => {
+    if (task.title === title) {
+      return { ...task, completed };
+    }
+    return task;
+  });
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function deleteTask(title, taskItem) {
+  taskItem.remove();
+
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks = tasks.filter((task) => task.title !== title);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }

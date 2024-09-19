@@ -2,7 +2,7 @@
 @import "../../../styles/mixins.scss";
 
 .modal {
-    &__title-tasks{
+    &__title-tasks {
         font-size: 22px;
         text-align: center;
         padding-top: 10px;
@@ -15,13 +15,12 @@
             right: 10px;
         }
     }
-    &__tasks{
+    &__tasks {
         padding: 20px;
     }
-    &__tasks-form{
-
+    &__tasks-form {
     }
-    &__tasks-list{
+    &__tasks-list {
         max-height: 175px;
         overflow-y: scroll;
         scrollbar-width: none;
@@ -29,21 +28,38 @@
             display: none;
         }
     }
-    &__btn-clear-all-tasks{
+    &__btn-clear-all-tasks {
         position: absolute;
         top: 60px;
         right: 40px;
     }
-    &__tasks-input{
+    &__tasks-input {
         border-bottom: 1px solid #ffffff;
         width: 100%;
-        &::placeholder{
-            color:$text-light-gray;
+        &::placeholder {
+            color: $text-light-gray;
         }
-
     }
     &__completed-task {
         text-decoration: line-through;
         color: gray;
-      }
+    }
+    &__tasks-delete-btn {
+        position: absolute;
+        right: 40px;
+        opacity: 0;
+        @include transition(opacity);
+    }
+    &__tasks-item {
+        margin: 5px;
+        @include flex-horizontal-center;
+        width: 100%;
+        height: 20px;
+
+        &:hover {
+            .modal__tasks-delete-btn {
+                opacity: 1;
+            }
+        }
+    }
 }
