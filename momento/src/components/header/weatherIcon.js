@@ -15,7 +15,7 @@ export async function getWeatherIcon(res, arr) {
 
 export const weatherIcons = [
   {
-    weather_name: 'clear',
+    weather_name: "clear",
     weather_svg: `<svg width="40px" height="40px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
 
 <g id="SVGRepo_bgCarrier" stroke-width="0"/>
