@@ -30,14 +30,33 @@ a {
     transition: border-color 0.3s ease-in-out;
     border-bottom: 1px solid transparent;
     animation: drawing 0.4s;
-
-    
 }
 
 @import "./keyframes";
 
 body {
     background-color: rgb(73, 69, 69);
-    
 }
 
+.loader {
+    z-index: 1000;
+    border: 8px solid rgba(255, 255, 255, 0.3);
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    right: 50px;
+    top: 35px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
